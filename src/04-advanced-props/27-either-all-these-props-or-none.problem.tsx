@@ -15,7 +15,10 @@ type InputProps = (
       value: string;
       onChange: ChangeEventHandler;
     }
-  | {}
+  | {
+      value?: undefined; //NOTE - never will work, but reduces itself to undefined
+      onChange?: undefined; // because never | undefined is always reduced to undefined
+    }
 ) & {
   label: string;
 };

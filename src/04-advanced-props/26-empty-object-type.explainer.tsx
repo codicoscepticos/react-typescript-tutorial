@@ -1,3 +1,4 @@
+//NOTE - In TypeScript, {} represents everything which has properties, and is not undefined or null.
 const Component = (props: { config: {} }) => {
   return <div />;
 };
