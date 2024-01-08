@@ -29,6 +29,8 @@ class ClassComponent extends React.Component<{
   }
 }
 
+type Example2 = Array<React.ComponentType<{ prop1: string }>>;
+
 const tests2: Array<React.ComponentType<{ prop1: string }>> = [
   FuncComponent,
   ClassComponent,

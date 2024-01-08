@@ -19,3 +19,7 @@ const element = React.createElement("div");
 //              ^?
 
 export {};
+
+//NOTE - Some tests:
+const elem = React.createElement("div");
+const elems = React.Children.map(elem, (elem) => elem.type);
