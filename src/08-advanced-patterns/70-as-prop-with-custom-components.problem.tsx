@@ -17,13 +17,16 @@ import { Equal, Expect } from "../helpers/type-utils";
  *   - ComponentPropsWithRef
  *   - ComponentProps
  */
-export const Wrapper = <TAs extends keyof JSX.IntrinsicElements>(
+export const Wrapper = <
+  TAs extends
+    | keyof JSX.IntrinsicElements
+    | React.ComponentType<React.ComponentProps<TAs>>
+>(
   props: {
     as: TAs;
-  } & React.ComponentProps<TAs>,
+  } & React.ComponentProps<TAs>
 ) => {
-  const Comp = props.as as string;
-
+  const Comp = props.as;
   return <Comp {...(props as any)}></Comp>;
 };
 

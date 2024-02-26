@@ -33,7 +33,7 @@ type Props<T> = {
  */
 export const Table = <T,>(
   props: Props<T>,
-  ref: ForwardedRef<HTMLTableElement>,
+  ref: ForwardedRef<HTMLTableElement>
 ) => {
   return <table ref={ref} />;
 };

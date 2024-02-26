@@ -1,13 +1,23 @@
 import { Router, useRouter } from "fake-external-lib";
+import { FC } from "react";
 import { Equal, Expect } from "../helpers/type-utils";
 
-export const withRouter = <TProps,>(Component: React.ComponentType<TProps>) => {
-  const NewComponent = (props: Omit<TProps, "router">) => {
+type C<P = {}> = {
+  (props: P, context?: any): React.ReactNode;
+};
+
+/**
+ * NOTE - This is not actually a real solution. As you return an FC as a C. And later you cannot
+ * access the `displayName` property of the returned component. In this solution you cast a lot,
+ * just to make TypeScript to not complain. The program will work, but it's not an ideal solution.
+ */
+export const withRouter = <P,>(Component: C<P>): C<Omit<P, "router">> => {
+  const NewComponent: FC<Omit<P, "router">> = (props) => {
     const router = useRouter();
-    return <Component {...(props as TProps)} router={router} />;
+    return <Component {...(props as P)} router={router} />;
   };
 
-  NewComponent.displayName = `withRouter(${Component.displayName})`;
+  NewComponent.displayName = `withRouter(${(Component as FC<P>).displayName})`;
 
   return NewComponent;
 };

@@ -1,5 +1,6 @@
 import { Equal, Expect } from "../helpers/type-utils";
 
+type InputType = keyof typeof COMPONENTS;
 type InputProps = React.ComponentProps<"input">;
 
 /**
@@ -22,9 +23,9 @@ const COMPONENTS = {
   password: (props) => {
     return <input {...props} type="password" />;
   },
-};
+} satisfies Record<string, React.FC<InputProps>>;
 
-export const Input = (props: unknown) => {
+export const Input = (props: { type: InputType } & InputProps) => {
   const Component = COMPONENTS[props.type];
   return <Component {...props} />;
 };

@@ -18,7 +18,7 @@ export const UnwrappedLink = <TAs extends ElementType>(
   props: {
     as?: TAs;
   } & ComponentPropsWithoutRef<ElementType extends TAs ? "a" : TAs>,
-  ref: ForwardedRef<any>,
+  ref: ForwardedRef<any>
 ) => {
   const { as: Comp = "a", ...rest } = props;
   return <Comp {...rest} ref={ref}></Comp>;
@@ -107,10 +107,10 @@ const Example2 = () => {
 const Custom = forwardRef(
   (
     props: { thisIsRequired: boolean },
-    ref: React.ForwardedRef<HTMLAnchorElement>,
+    ref: React.ForwardedRef<HTMLAnchorElement>
   ) => {
     return <a ref={ref} />;
-  },
+  }
 );
 
 const Example3 = () => {
