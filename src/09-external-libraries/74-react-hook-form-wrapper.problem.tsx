@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { DefaultValues, FieldValues, useForm } from "react-hook-form";
 import { Equal, Expect, Extends } from "../helpers/type-utils";
 
 /**
@@ -10,9 +10,9 @@ import { Equal, Expect, Extends } from "../helpers/type-utils";
  *
  * A clue: you'll need this line of code:
  *
- * defaultValues as DefaultValues<TValues>
+ * defaultValues as DefaultValues<TValues> //NOTE - Seems this is not needed. The `DefaultValues<TValues>` part of the clue, it is needed, though.
  */
-const useCustomForm = (defaultValues: any) => {
+const useCustomForm = <TValues extends FieldValues>(defaultValues: DefaultValues<TValues>) => {
   const form = useForm({
     defaultValues: defaultValues,
   });
@@ -31,7 +31,7 @@ useCustomForm();
 
 useCustomForm(
   // @ts-expect-error defaultValues must be an object
-  2,
+  2
 );
 
 const customForm = useCustomForm({
@@ -54,6 +54,4 @@ customForm.handleSubmit((values) => {
 });
 
 // Expect that only the methods we want are exposed
-type test = Expect<
-  Equal<keyof typeof customForm, "register" | "handleSubmit" | "getValues">
->;
+type test = Expect<Equal<keyof typeof customForm, "register" | "handleSubmit" | "getValues">>;
